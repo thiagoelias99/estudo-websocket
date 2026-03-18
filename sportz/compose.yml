@@ -1,0 +1,24 @@
+services:
+  # DATABASE_URL="postgresql://docker:docker@localhost:5432/sportz_dev"
+  sportz_db:
+    image: bitnami/postgresql:latest
+    container_name: sportz_db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=sportz_dev
+    volumes:
+      - sportz_postgres_data:/bitnami/postgresql
+    networks:
+      - sportz-net
+
+volumes:
+  sportz_postgres_data:
+
+networks:
+  sportz-net:
+    driver: bridge
+
